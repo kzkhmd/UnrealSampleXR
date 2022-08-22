@@ -13,5 +13,8 @@ UCLASS()
 class TESTANDROIDSDK_API UWifiScanner : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void StartScan();
 };
