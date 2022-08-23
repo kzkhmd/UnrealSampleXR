@@ -16,5 +16,5 @@ class TESTANDROIDSDK_API UWifiScanner : public UBlueprintFunctionLibrary
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void StartScan();
+	static void StartScan();
 };

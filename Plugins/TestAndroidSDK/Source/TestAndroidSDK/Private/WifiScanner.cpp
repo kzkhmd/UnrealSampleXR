@@ -27,14 +27,14 @@ void UWifiScanner::StartScan()
 		jmethodID WifiScannerConstructor = Env->GetMethodID(WifiScannerClass, "<init>", "()V");				// コンストラクタを取得
 
 		JNINativeMethod NativeMethod = {"dispatchSSID", "(Ljava/lang/String)V", (void*)dispatchSSID};		// コールバック関数を登録
-		Env->RegisterNatives(WifiCannerClass, &NativeMethod, 1);											// コールバック関数を登録
+		Env->RegisterNatives(WifiScannerClass, &NativeMethod, 1);											// コールバック関数を登録
 
 		jobject WifiScannerObj = Env->NewObject(WifiScannerClass, WifiScannerConstructor);					// インスタンス化
 
 		jmethodID StartScanID = Env->GetMethodID(WifiScannerClass, "StartScan", "(Landroid/app/Activity;)V");	// インスタンスメソッドIDを取得
 
-		extern struct android_app* GNativeAndroidApp;
-		Env->CallVoidMethod(WifiScannerObj, StartScanID, GNativeAndroidApp->activity->clazz);
+		jobject GameActivityThis = FAndroidApplication::GetGameActivityThis();
+		Env->CallVoidMethod(WifiScannerObj, StartScanID, GameActivityThis);
 	}
 	
 #endif
