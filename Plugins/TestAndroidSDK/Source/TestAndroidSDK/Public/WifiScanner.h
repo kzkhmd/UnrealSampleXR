@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#if PLATFORM_ANDROID
+#include "Android/AndroidJNI.h"
+#endif
 #include "WifiScanner.generated.h"
 
 /**
@@ -17,4 +20,12 @@ class TESTANDROIDSDK_API UWifiScanner : public UBlueprintFunctionLibrary
 public:
 	UFUNCTION(BlueprintCallable)
 	static void StartScan();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void NotifySSID(FString ssid);
+
+private:
+#if PLATFORM_ANDROID
+	void DispatchSSID(JNIEnv* Env, jobject Obj, jstring ssid);
+#endif
 };
