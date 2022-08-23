@@ -1,12 +1,18 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class TestAndroidSDK : ModuleRules
 {
 	public TestAndroidSDK(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		if (Target.Platform == UnrealTargetPlatform.Android)
+		{
+			AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", Path.Combine(ModuleDirectory, "TestAndroidSDK_UPL_Android.xml")));
+		}
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
@@ -38,6 +44,7 @@ public class TestAndroidSDK : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"Launch",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
