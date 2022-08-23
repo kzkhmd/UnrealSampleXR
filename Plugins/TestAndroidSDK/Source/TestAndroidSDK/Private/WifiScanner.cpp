@@ -10,7 +10,7 @@
 
 
 #if PLATFORM_ANDROID
-void UWifiScanner::DispatchSSID(JNIEnv* Env, jobject Obj, jstring ssid)
+void DispatchSSID(JNIEnv* Env, jobject Obj, jstring ssid)
 {
 	if (Env != nullptr)
 	{

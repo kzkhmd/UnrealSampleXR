@@ -44,7 +44,6 @@ public class TestAndroidSDK : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"Launch",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
