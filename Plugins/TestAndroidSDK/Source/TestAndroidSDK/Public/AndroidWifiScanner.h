@@ -12,7 +12,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class TESTANDROIDSDK_API UAndroidWifiScanner : public UObject
 {
 	GENERATED_BODY()
@@ -26,6 +26,6 @@ public:
 
 #if PLATFORM_ANDROID
 private:
-	void OnReceive(JNIEnv* Env, jobject Obj, jstring Ssid);
+	static void OnReceive(JNIEnv* Env, jobject Obj, jstring Ssid);
 #endif
 };

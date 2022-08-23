@@ -4,9 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#if PLATFORM_ANDROID
-#include "Android/AndroidJNI.h"
-#endif
 #include "WifiScanner.generated.h"
 
 /**

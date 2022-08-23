@@ -18,7 +18,7 @@ void UAndroidWifiScanner::StartScan()
 	{
 		jclass WifiScannerClass = FAndroidApplication::FindJavaClass("com/example/mylibrary/WifiScanner");	// 使用するクラスを取得
 
-		JNINativeMethod NativeMethod = {"dispatchSSID", "(Ljava/lang/String)V", (void*)DispatchSSID};		// コールバック関数を登録
+		JNINativeMethod NativeMethod = {"dispatchSSID", "(Ljava/lang/String)V", (void*)OnReceive};		// コールバック関数を登録
 		Env->RegisterNatives(WifiScannerClass, &NativeMethod, 1);											// コールバック関数を登録
 
 		jmethodID WifiScannerConstructor = Env->GetMethodID(WifiScannerClass, "<init>", "()V");				// コンストラクタを取得
@@ -35,6 +35,10 @@ void UAndroidWifiScanner::StartScan()
 #if PLATFORM_ANDROID
 void UAndroidWifiScanner::OnReceive(JNIEnv* Env, jobject Obj, jstring Ssid)
 {
-	;
+	if (Env != nullptr)
+	{
+		const char* c_ssid = Env->GetStringUTFChars(Ssid, nullptr);
+		const FString s_ssid = c_ssid;
+	}
 }
 #endif
