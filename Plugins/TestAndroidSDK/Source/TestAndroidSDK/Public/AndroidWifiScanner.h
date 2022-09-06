@@ -9,6 +9,9 @@
 #endif
 #include "AndroidWifiScanner.generated.h"
 
+
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOnReceiveWifiScanDataDelegate, const FString&, ssid);
+
 /**
  * 
  */
@@ -19,13 +22,16 @@ class TESTANDROIDSDK_API UAndroidWifiScanner : public UObject
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void StartScan();
+	static FString GetPath();
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnReceiveWifiScanData(const FString& Ssid);
+	UFUNCTION(BlueprintCallable)
+	static FString StartScan();
 
-#if PLATFORM_ANDROID
+	UFUNCTION(BlueprintCallable)
+	static void BindToOnReceiveWifiScanDataDelegate(const FOnReceiveWifiScanDataDelegate& delegate);
+
+	static void ExecuteOnReceiveWifiScanDataDelegate(const FString& ssid);
+
 private:
-	static void OnReceive(JNIEnv* Env, jobject Obj, jstring Ssid);
-#endif
+	static FOnReceiveWifiScanDataDelegate OnReceiveWifiScanDataDelegate;
 };

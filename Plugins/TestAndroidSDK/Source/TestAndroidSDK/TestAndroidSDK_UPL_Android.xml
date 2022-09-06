@@ -6,29 +6,25 @@
 		<log text="TestAndroidSDK Android init" />
 	</init>
 
+	<prebuildCopies>
+		<copyDir src="$S(PluginDir)/Private/Java" dst="$S(BuildDir)/src/com/Plugins/TestAndroidSDK" />
+	</prebuildCopies>
+
 	<resourceCopies>
 		<copyFile src="$S(PluginDir)/../../ThirdParty/Repository/mylibrary-release.aar" dst="$S(BuildDir)/libs/mylibrary-release.aar" />
 	</resourceCopies>
 
-	<buildGradleAdditions>
-		<insert>
-			dependencies {
-				implementation fileTree(dir: 'src/main/libs', include: ['*.aar'])
-			}
-		</insert>
-	</buildGradleAdditions>
-
 	<proguardAdditions>
 		<insert>
-			-keep public class com.example.mylibrary.MyLib {
+			-keep public class com.example.mylibrary.WifiScanner {
 				*;
 			}
 		</insert>
 	</proguardAdditions>
 
-	<gameActivityImportAdditions>
-		<insert>
-			import com.example.mylibrary.MyLib;
-		</insert>
-	</gameActivityImportAdditions>
+	<androidManifestUpdates>
+		<addPermission android:name="android.permission.CHANGE_WIFI_STATE" />
+		<addPermission android:name="android.permission.ACCESS_WIFI_STATE" />
+		<addPermission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	</androidManifestUpdates>
 </root>
