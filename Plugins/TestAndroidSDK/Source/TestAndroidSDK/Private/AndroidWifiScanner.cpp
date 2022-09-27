@@ -10,7 +10,7 @@
 
 
 FOnReceiveWifiScanDataDelegate UAndroidWifiScanner::OnReceiveWifiScanDataDelegate;
-jobject globalref;
+
 
 FString UAndroidWifiScanner::GetPath()
 {
@@ -50,7 +50,6 @@ FString UAndroidWifiScanner::StartScan()
 
 		jmethodID WifiScannerConstructor = Env->GetMethodID(WifiScannerClass, "<init>", "()V");						// コンストラクタを取得
 		jobject WifiScannerObj = Env->NewObject(WifiScannerClass, WifiScannerConstructor);							// インスタンス化
-		globalref = Env->NewGlobalRef(WifiScannerObj);
 		jmethodID StartScanID = Env->GetMethodID(WifiScannerClass, "startScan", "(Landroid/app/Activity;)V");		// インスタンスメソッドIDを取得
 
 		jobject GameActivityThis = FAndroidApplication::GetGameActivityThis();										// GameActivityのインスタンスを取得
@@ -90,8 +89,6 @@ Java_com_example_mylibrary_WifiScanner_dispatchSSID(JNIEnv* Env, jobject Obj, js
 		UE_LOG(LogTemp, Warning, TEXT("did dispatchSSID"));
 
 		UAndroidWifiScanner::ExecuteOnReceiveWifiScanDataDelegate(s_ssid);
-
-		Env->DeleteGlobalRef(globalref);
 	}
 }
 #endif
