@@ -47,7 +47,7 @@ Java_com_example_mylibrary_BatteryObserver_dispatchEvent(JNIEnv* env, jobject ob
 {
 	if(env != nullptr)
 	{
-		UAndroidBatteryObserver::ExecuteOnReceiveBatteryStatusDelegate(status);
+		UAndroidBatteryObserver::ExecuteOnReceiveBatteryStatusDelegate(temperature);
 	}
 }
 #endif
